@@ -205,7 +205,7 @@ This dashboard can be used on TVs or on monitors.
 
 [Repository][balena-ads-b] by [ketilmo][ketilmo]
 
-This is project allows you to log humidity and temperature data from a simple sensor and stores that data in a [firebase][firebase] backend.
+Track the planes flying over your home with the help of balena, ADS-B data, a Raspberry Pi, and an affordable RTL-SDR USB dongle. You can even share your data with the community by feeding third-party flight tracking services such as FlightAware, Flightradar24, and Plane Finder. If you do, these services will reward you with free premium accounts – worth several hundred dollars/year!
 
 <!-- ###Team Project Links -->
 
