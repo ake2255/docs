@@ -63,6 +63,7 @@ Learn
 
   MANAGE
     [/learn/manage/account]
+    [/learn/manage/organizations]
     [/learn/manage/billing]
     [/learn/manage/app-types]
     [/learn/manage/device-statuses]
@@ -88,6 +89,7 @@ Learn
       Services[/learn/more/masterclasses/services-masterclass]
       Fleet management[/learn/more/masterclasses/fleet-management]
       Device debugging[/learn/more/masterclasses/device-debugging]
+      Docker[/learn/more/masterclasses/docker-masterclass/]
     [/learn/more/anti-patterns]
 
 FAQ
@@ -119,6 +121,7 @@ Reference
     Supervisor API[/reference/supervisor/supervisor-api]
     [/reference/supervisor/bandwidth-reduction]
     [/reference/supervisor/docker-compose]
+    Upgrade Policy[/reference/supervisor/supervisor-upgrades]
 
   Base images
     [/reference/base-images/base-images]

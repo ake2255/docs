@@ -34,12 +34,12 @@ If you are running a Docker-in-Docker setup, which builds a single application c
 
 ##### Can I mix device types in an application?
 
-It is possible to have devices of [different types][device-types] in the same application, as long as the devices share the same architecture. For example, you could have an application with both Raspberry Pi 3 and BeagleBone Black devices, as they both use an ARMv7 processor. However, you could not have any Intel NUC devices as part of the same application, as those devices have x86-64 processors.
+It is possible to have devices of [different types][device-types] in the same application, as long as they have the same or compatible architectures. For example, you could have an application with both Raspberry Pi 3 and BeagleBone Black devices, as they both use an ARMv7 processor. Or you could have both a Raspberry Pi 3 and a Raspberry Pi Zero, each provisioned with its device specific host OS image, but running the same ARMv6 container image.  However, you could not have any Intel NUC devices as part of the same application, as those devices have x86-64 processors.
 
 Regardless of type, all devices in your application will get the same container images. This means that if you have mixed device types you'll need to use an architecture-specific [base image][base-image] in your [Dockerfile][dockerfile], rather than one based on device type.
 
 ##### How do I push a new git repo to an application?
-If you have pushed a repository called `project-A` to your application and at a later stage you would like to push a new project called `project-B`, you can do this by adding the application remote (`git remote add {{ $names.company.short }} <USERNAME>@git.{{ $names.dashboard_domain }}:<USERNAME>/<APPNAME>.git`) to `project-B`'s local repository. You can then easily push `project-B` to your application by just doing `git push {{ $names.company.short }} master -f`. The extra `-f` on the command forces the push and resets the git history on the git remote on {{ $names.company.lower }}'s backend. You should now have `project-B` running on all the devices in the application fleet. Note that once you have successfully switched to `project-B` you no longer need to add the `-f` on every push, for more info check out the docs on [forced git pushes](https://git-scm.com/docs/git-push#git-push--f).
+If you have pushed a repository called `project-A` to your application and at a later stage you would like to push a new project called `project-B`, you can do this by adding the application remote (`git remote add {{ $names.company.short }} <USERNAME>@git.{{ $names.cloud_domain }}:<USERNAME>/<APPNAME>.git`) to `project-B`'s local repository. You can then easily push `project-B` to your application by just doing `git push {{ $names.company.short }} master -f`. The extra `-f` on the command forces the push and resets the git history on the git remote on {{ $names.company.lower }}'s backend. You should now have `project-B` running on all the devices in the application fleet. Note that once you have successfully switched to `project-B` you no longer need to add the `-f` on every push, for more info check out the docs on [forced git pushes](https://git-scm.com/docs/git-push#git-push--f).
 
 ##### Why does /data report weird usage?
 On the device we have a writable data partition that uses all the free space remaining after reserving the required amount for the host os. This data partition contains the Docker images for the {{ $names.company.lower }} device supervisor and the user applications so that they can be updated, along with containing the persistent `/data` for the application to use, this way it avoids reserving a specific amount of space for either images or data and then finding out that we have reserved too much or too little for one. So the space usage in `/data` being used but not accounted for will likely be due to the Docker images. (As a side note if you want the most accurate usage stats you should use `btrfs fi df /data` as `df` is not accurate for btrfs partitions).
@@ -73,7 +73,7 @@ In order for a {{ $names.company.lower }} device to get outside of the local net
 Each of these should work with outward only (and inward once outward connection established) firewall settings.
 
 Additionally, you should whitelist the following domains for the relevant ports above:
-* `*.{{ $names.dashboard_domain }}`
+* `*.{{ $names.cloud_domain }}`
 * `*.docker.com`
 * `*.docker.io`
 
